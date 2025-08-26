@@ -3,12 +3,12 @@ from sqlalchemy import create_engine
 
 app = FastAPI()
 
-DATABASE_URL = "mysql+pymysql://root:root@forum_db:3306/forum_db"
+DATABASE_URL = "mysql+pymysql://root:root@course_db:3306/course_db"
 engine = create_engine(DATABASE_URL)
 
 @app.get("/")
 def home():
-    return {"message": "Forum Service Running"}
+    return {"message": "Course Service Running"}
 
 @app.get("/health")
 def health_check():
