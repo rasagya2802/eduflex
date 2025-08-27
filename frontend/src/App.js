@@ -6,13 +6,13 @@ function App() {
   const [newCourse, setNewCourse] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:8003/courses")
+    axios.get("http://localhost:8002/courses")
       .then(res => setCourses(res.data))
       .catch(err => console.error(err));
   }, []);
 
   const addCourse = () => {
-    axios.post(`http://localhost:8003/courses?name=${newCourse}&description=Sample`)
+    axios.post(`http://localhost:8002/courses?name=${newCourse}&description=Sample`)
       .then(() => window.location.reload())
       .catch(err => console.error(err));
   };
