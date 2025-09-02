@@ -10,6 +10,7 @@ services:
       - "8001:8001"
     depends_on:
       - auth_db
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
 
   auth_db:
     image: mysql:8
@@ -34,6 +35,7 @@ services:
       - "8003:8003"
     depends_on:
       - user_db
+    command: uvicorn main:app --host 0.0.0.0 --port 8003 --reload
 
   user_db:
     image: mysql:8
@@ -58,7 +60,7 @@ services:
       - "8002:8002"
     depends_on:
       - course_db
-    command: uvicorn main:app --host 0.0.0.0 --port 8002
+    command: uvicorn main:app --host 0.0.0.0 --port 8002 --reload
 
   course_db:
     image: mysql:8
@@ -83,6 +85,7 @@ services:
       - "8005:8005"
     depends_on:
       - forum_db
+    command: uvicorn main:app --host 0.0.0.0 --port 8005 --reload
 
   forum_db:
     image: mysql:8
@@ -107,6 +110,7 @@ services:
       - "8004:8004"
     depends_on:
       - grading_db
+    command: uvicorn main:app --host 0.0.0.0 --port 8004 --reload
 
   grading_db:
     image: mysql:8
@@ -129,6 +133,7 @@ services:
       - ./notification_service:/app
     ports:
       - "8006:8006"
+    command: uvicorn main:app --host 0.0.0.0 --port 8006 --reload
 
   # ========================
   # Frontend (React)
@@ -147,6 +152,9 @@ services:
       - forum_service
       - grading_service
       - notification_service
+    command: npm start
+    stdin_open: true
+    tty: true
 
 # ========================
 # Named Volumes
